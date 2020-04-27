@@ -24,13 +24,21 @@ function merge(arr, start, end, split) {
     // copy the temp array over
     count = 0;
       var svg = document.getElementById("SVG");
+      var toRemove = document.querySelectorAll('rect[x]');;
     for(var i = start; i <= end; i++) {
       arr[i] = _tmpArr[count++];
 
-      svg.removeChild(svg.childNodes[i]);
+      for(var r = 0; r < toRemove.length; r++) {
+        if(toRemove[r].getAttribute("x") == ((i+1)*15).toString()) {
+          break;
+        }
+      }
+      // now find the one with the correct x value to remove it
+      svg.removeChild(toRemove[r]);
+      //svg.removeChild(svg.childNodes[i]);
       shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
-      shape.setAttribute("x", i*15);
+      shape.setAttribute("x", (i+1)*15);
       shape.setAttribute("y", 250-arr[i]);
       shape.setAttribute("id", "rect"+i);
       shape.setAttribute("width", 15);
