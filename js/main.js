@@ -23,8 +23,41 @@ function merge(arr, start, end, split) {
     }
     // copy the temp array over
     count = 0;
-      var svg = document.getElementById("SVG");
-      var toRemove = document.querySelectorAll('rect[x]');;
+    var svg = document.getElementById("SVG");
+    var toRemove = document.querySelectorAll('rect[x]');
+
+     for(let i = start; i <= end; i++) {
+        arr[i] = _tmpArr[count++];
+       task(i);
+     }
+
+     function task(i) {
+       setTimeout(function() {
+         console.log("count = "+count);
+         console.log("arr = "+arr);
+         console.log("_tmpArr = "+_tmpArr);
+         for(var r = 0; r < toRemove.length; r++) {
+           //console.log(`attribute = ${toRemove[r].getAttribute("x")}, and x = ${((i+1)*15).toString()}`);
+           if(toRemove[r].getAttribute("x") == ((i+1)*15).toString()) {
+             break;
+           }
+         }
+         //console.log("so, r = "+r);
+         // now find the one with the correct x value to remove it
+         svg.removeChild(toRemove[r]);
+         //svg.removeChild(svg.childNodes[i]);
+         shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    
+         shape.setAttribute("x", (i+1)*15);
+         shape.setAttribute("y", 250-arr[i]);
+         shape.setAttribute("id", "rect"+i);
+         shape.setAttribute("width", 15);
+         shape.setAttribute("height", arr[i]);
+         shape.setAttribute("fill", "grey");
+         svg.appendChild(shape);
+       }, 250 * i);
+     }
+/*
     for(var i = start; i <= end; i++) {
       arr[i] = _tmpArr[count++];
 
@@ -47,22 +80,9 @@ function merge(arr, start, end, split) {
       svg.appendChild(shape);
 
     }
+*/
     return;
 }
-
-// function barAnim(arr, i) {
-//   var svg = document.getElementById("SVG");
-//   svg.removeChild(svg.childNodes[i]);
-//   var shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-//
-//   shape.setAttribute("x", i*15);
-//   shape.setAttribute("y", 250-arr[i]);
-//   shape.setAttribute("id", "rect"+i);
-//   shape.setAttribute("width", 15);
-//   shape.setAttribute("height", arr[i]);
-//   shape.setAttribute("fill", "grey");
-//   svg.appendChild(shape);
-// }
 
 
 function mergeSort(arr, start, end) {
@@ -72,8 +92,11 @@ function mergeSort(arr, start, end) {
   var split = Math.floor((start + end) / 2);
 
   mergeSort(arr, start, split);  // sort left side
-  mergeSort(arr, split+1, end);  // sort right side
-  merge(arr, start, end, split);  // merge them together
+  // setTimeout(mergeSort, 250, arr, start, split);
+    mergeSort(arr, split+1, end);  // sort right side
+   //setTimeout(mergeSort, 250, arr, split+1, end);
+   merge(arr, start, end, split);  // merge them together
+  // setTimeout(merge, 1000, arr, start, end, split);
 
 }
 
@@ -127,7 +150,9 @@ function main(sort) {
       document.getElementById("SVG").appendChild(shape);
     }
   } else {
+    //setTimeout(mergeSort, 1000, barHeights, 0, 24);
     mergeSort(barHeights, 0, 24);
+    console.log("end merge");
   }
 }
 
