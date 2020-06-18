@@ -1,4 +1,37 @@
+@font-face{font-family:headerFont;src:url('fonts/headerFont.otf')}
+@font-face{font-family:headerFont;font-weight:bold;src:url('fonts/headerFont.otf')}
 
-#container {
-   text-align:center;
+html, body {
+  overflow-x: hidden;
+  background-color: #9facbf;
+}
+
+svg {
+  padding: 0;
+  max-height: 80vh;
+}
+
+.pad {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #deebff;
+}
+
+rect {
+  fill: #647e9c;
+  stroke: #313c47;
+  stroke-width: 1;
+}
+
+h1 {
+  font-size: 60px;
+  font-family: headerFont, sans-serif;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+  #container {
+    margin-top: 10vh;
+  }
 }

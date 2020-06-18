@@ -2,18 +2,31 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,
-user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous">
     <link rel="stylesheet" href="css/master.css">
-    <title></title>
+    <title>Merge Sort</title>
   </head>
   <body>
     <div id="container">
-      <svg viewBox="-75 0 550 250" id="SVG">
-      </svg>
+      <div class="row text-center">
+        <div class="col-12 darkbg">
+          <h1>Merge Sort</h1>
+        </div>
+        <div class="col-12">
+          <div class="pad">
+            <svg viewBox="15 0 375 250" id="SVG"></svg>
+          </div>
+        </div>
+        <div class="col-12">
+          <button id="randomBtn" type="button" class="btn btn-secondary" onclick="main(false)">Randomize</button>
+          <button id="mergeBtn" type="button" class="btn btn-secondary" onclick="main(true)">Merge Sort</button>
+        </div>
+      </div>
     </div>
-    <button type="button" name="button" onclick="main(false)">Randomize</button>
-    <button type="button" name="button" onclick="main(true)">Merge Sort</button>
 
     <script src="js/main.js" charset="utf-8"></script>
   </body>
