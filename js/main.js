@@ -8,7 +8,7 @@ function completed() {
   function task(i) {
     setTimeout(function() {
       svgChildren[i].style.fill = "#69ff6b";
-    }, 20*i);
+    }, 15*i);
   }
 }
 
@@ -44,33 +44,28 @@ function merge(arr, start, end, split) {
 
       for(let i = start; i <= end; i++) {
         arr[i] = _tmpArr[count++];
-        task(i);
-      }
-
-      function task(i) {
-        setTimeout(function() {
-          for(var r = 0; r < toRemove.length; r++) {
-            if(toRemove[r].getAttribute("x") == ((i+1)*3.75).toString()) {
-              break;
-            }
+        // task(i);
+        for(var r = 0; r < toRemove.length; r++) {
+          if(toRemove[r].getAttribute("x") == ((i+1)*3.75).toString()) {
+            break;
           }
-          // now find the one with the correct x value try to remove it
-          try {
-            svg.removeChild(document.getElementById(toRemove[r].id));
-          } catch (e) {
-            console.log("could not find child of svg with id:", toRemove[r].id);
-          }
-          shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        }
+        // now find the one with the correct x value try to remove it
+        try {
+          svg.removeChild(document.getElementById(toRemove[r].id));
+        } catch (e) {
+          console.log("could not find child of svg with id:", toRemove[r].id);
+        }
+        shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
-          shape.setAttribute("x", (i+1)*3.75);
-          shape.setAttribute("y", 250-arr[i]);
-          shape.setAttribute("id", "rect"+i);
-          shape.setAttribute("width", 3.75);
-          shape.setAttribute("rx", 1)
-          shape.setAttribute("ry", 1)
-          shape.setAttribute("height", arr[i]);
-          svg.appendChild(shape);
-        }, 2*i);
+        shape.setAttribute("x", (i+1)*3.75);
+        shape.setAttribute("y", 250-arr[i]);
+        shape.setAttribute("id", "rect"+i);
+        shape.setAttribute("width", 3.75);
+        shape.setAttribute("rx", 1)
+        shape.setAttribute("ry", 1)
+        shape.setAttribute("height", arr[i]);
+        svg.appendChild(shape);
       }
       resolve("Resolved");
     },300);
@@ -83,7 +78,7 @@ async function mergeSort(arr, start, end) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve("resolved");
-      },100);
+      },50);
     });
   }
   var split = Math.floor((start + end) / 2);
@@ -98,13 +93,13 @@ async function mergeSort(arr, start, end) {
 
 
 function randomize() {
-  var random = [];
-  var _tmp, swapA, swapB;
+  let random = [];
+  let _tmp, swapA, swapB;
 
-  for (var i = 1; i <= 100; i++) {
+  for(let i = 1; i <= 100; i++) {
     random.push(i);
   }
-  for(var i = 0; i < 100; i++) {
+  for(let i = 0; i < 100; i++) {
     // do random swapping to randomize
     swapA = Math.floor(Math.random()*100);
     swapB = Math.floor(Math.random()*100);
@@ -127,12 +122,12 @@ async function main(sort) {
     c = 0;
 
     // first clear the svg if there are any children
-    while (svg.lastChild) {
+    while(svg.lastChild) {
       svg.removeChild(svg.lastChild);
     }
 
     // create each line
-    for(var i = 1; i <= 100; i++) {
+    for(let i = 1; i <= 100; i++) {
       shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       shape.setAttribute("x", i*3.75);
       shape.setAttribute("y", 250-randomArr[c]*2);
@@ -154,7 +149,6 @@ async function main(sort) {
     const res = await mergeSort(barHeights, 0, 99);
     document.getElementById("randomBtn").disabled = false;
     document.getElementById("mergeBtn").disabled = false;
-    console.log("done");
     setTimeout(() => {
       completed();
       setTimeout
