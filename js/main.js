@@ -1,3 +1,17 @@
+function completed() {
+  let svgChildren = document.getElementById("SVG").children;
+
+  for(let i = 0; i < svgChildren.length; ++i) {
+    task(i);
+  }
+
+  function task(i) {
+    setTimeout(function() {
+      svgChildren[i].style.fill = "#69ff6b";
+    }, 20*i);
+  }
+}
+
 
 function merge(arr, start, end, split) {
   return new Promise(resolve => {
@@ -36,7 +50,7 @@ function merge(arr, start, end, split) {
       function task(i) {
         setTimeout(function() {
           for(var r = 0; r < toRemove.length; r++) {
-            if(toRemove[r].getAttribute("x") == ((i+1)*15).toString()) {
+            if(toRemove[r].getAttribute("x") == ((i+1)*3.75).toString()) {
               break;
             }
           }
@@ -48,18 +62,18 @@ function merge(arr, start, end, split) {
           }
           shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
 
-          shape.setAttribute("x", (i+1)*15);
+          shape.setAttribute("x", (i+1)*3.75);
           shape.setAttribute("y", 250-arr[i]);
           shape.setAttribute("id", "rect"+i);
-          shape.setAttribute("width", 15);
-          shape.setAttribute("rx", 2)
-          shape.setAttribute("ry", 2)
+          shape.setAttribute("width", 3.75);
+          shape.setAttribute("rx", 1)
+          shape.setAttribute("ry", 1)
           shape.setAttribute("height", arr[i]);
           svg.appendChild(shape);
-        }, 10*i);
+        }, 2*i);
       }
       resolve("Resolved");
-    },200);
+    },300);
   });
 }
 
@@ -87,13 +101,13 @@ function randomize() {
   var random = [];
   var _tmp, swapA, swapB;
 
-  for (var i = 1; i <= 25; i++) {
+  for (var i = 1; i <= 100; i++) {
     random.push(i);
   }
-  for(var i = 0; i < 25; i++) {
+  for(var i = 0; i < 100; i++) {
     // do random swapping to randomize
-    swapA = Math.floor(Math.random()*25);
-    swapB = Math.floor(Math.random()*25);
+    swapA = Math.floor(Math.random()*100);
+    swapB = Math.floor(Math.random()*100);
     _tmp = random[swapA];
     random[swapA] = random[swapB];
     random[swapB] = _tmp;
@@ -118,18 +132,18 @@ async function main(sort) {
     }
 
     // create each line
-    for(var i = 1; i <= 25; i++) {
+    for(var i = 1; i <= 100; i++) {
       shape = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      shape.setAttribute("x", i*15);
-      shape.setAttribute("y", 250-randomArr[c]*10);
+      shape.setAttribute("x", i*3.75);
+      shape.setAttribute("y", 250-randomArr[c]*2);
       shape.setAttribute("id", "rect"+i);
-      shape.setAttribute("width", 15);
-      shape.setAttribute("rx", 2)
-      shape.setAttribute("ry", 2)
-      shape.setAttribute("height", randomArr[c]*10);
+      shape.setAttribute("width", 3.75);
+      shape.setAttribute("rx", 1)
+      shape.setAttribute("ry", 1)
+      shape.setAttribute("height", randomArr[c]*2);
       shape.setAttribute("fill", "grey");
 
-      barHeights.push(randomArr[c]*10);
+      barHeights.push(randomArr[c]*2);
 
       c++;
       document.getElementById("SVG").appendChild(shape);
@@ -137,9 +151,14 @@ async function main(sort) {
   } else {
     document.getElementById("randomBtn").disabled = true;
     document.getElementById("mergeBtn").disabled = true;
-    const res = await mergeSort(barHeights, 0, 24);
+    const res = await mergeSort(barHeights, 0, 99);
     document.getElementById("randomBtn").disabled = false;
     document.getElementById("mergeBtn").disabled = false;
+    console.log("done");
+    setTimeout(() => {
+      completed();
+      setTimeout
+    }, 200);
   }
 }
 
