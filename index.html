@@ -36,7 +36,7 @@
 
             <img class="codeImage" src="./pictures/merge.png" alt="merge image">
             <p>
-              let \(M(n_1, n_2)\) be the number of comparisons that algorithm Merge does on line 6. <br>
+              Let \(M(n_1, n_2)\) be the number of comparisons that algorithm Merge does on line 6. <br>
               \(M(n_1,n_2) \leq n_1 + n_2 -1 \)
             </p> <br>
             <h2>MergeSort Algorithm</h2>
@@ -58,10 +58,12 @@
             <br>
             <p>
               let \(C(n)\) be the number of comparisons that \(Mergesort\) does. <br>
-              There are \(C(n_1\) comparisons for the recursive call on line 11. <br>
-              There are \(C(n_2\) comparisons for the recursive call on line 12. <br>
+              There are \(C(n_1)\) comparisons for the recursive call on line 11. <br>
+              There are \(C(n_2)\) comparisons for the recursive call on line 12. <br>
               There are \(n_1 + n_2 - 1\) comparisons from the call to \(Merge\) on line 13. <br><br>
-              Therefore the recurrence relation is as follows: <br>
+              Therefore the recurrence relation is as follows:
+            </p>
+            <p class="equation">
               \(C(n) \leq C(n_1) + C(n_2) + n_1 + n_2 - 1 \) <br>
               \(C(n) \leq C(\frac{n}{2}) + C(\frac{n}{2}) + \frac{n}{2} + \frac{n}{2} - 1 \) <br>
               \(C(n) \leq C(\frac{n}{2}) + n - 1 \) <br><br>
@@ -72,13 +74,18 @@
               . . . <br>
               \(\frac{n}{2}C(2) \leq \frac{n}{2}(2C(1)+(2-1)) = nC(1) + \frac{n}{2}\) <br>
               \(nC(1) = 0 \) <br><br>
+            </p>
+            <p>
               By adding and cancelling these terms, we get <br>
+            </p>
+            <p class="equation">
               \(C(n) \leq (n-1) + (n-2) + (n-4) + \dots + (n - \frac{n}{2})\) <br>
               \(C(n) \leq \displaystyle\sum_{i=0}^{k-1}n - \displaystyle\sum_{i=0}^{k-1} 2^i\) <br>
               \(C(n) \leq kn - (n-1)\)<br>
+            </p>
+            <p>
               By our assumption that \(n=2^k\) and \(k = \log_2n\)<br><br>
               \(C(n) \leq n\log_2n-n+1\)
-
             </p>
             <br>
 

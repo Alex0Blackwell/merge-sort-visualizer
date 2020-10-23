@@ -9,8 +9,7 @@ html, body {
 svg {
   padding: 0;
   max-height: 80vh;
-  width: 100%
-  margin:20px;
+  width: 100%;
 }
 
 #container {
@@ -20,6 +19,7 @@ svg {
 .pad {
   border-radius: 5px;
   margin: 0 10px;
+  margin-top: 10px;
   background-color: #deebff;
 }
 
@@ -77,5 +77,8 @@ a:hover {
   }
   .codeImage {
     width: 90vw;
+  }
+  .equation {
+    font-size: 3.5vw;
   }
 }
